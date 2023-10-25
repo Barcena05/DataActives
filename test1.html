@@ -9,72 +9,72 @@
 <style>
   #futbol{
     position: absolute;
-    top: 10px;
+    top: 40px;
     left: 10px;
   }
   #soccerball{
     position: absolute;
-    top: 85px;
+    top: 115px;
     left: 145px;
     transition: all 0.5s ease-in-out;
   }
 
   #basket{
     position: absolute;
-    top: 10px;
+    top: 40px;
     left: 230px;
   }
   #basketball{
     position: absolute;
-    top: 85px;
+    top: 115px;
     left: 365px;
     transition: all 0.5s ease-in-out;
   }
 
   #rugby7{
     position: absolute;
-    top: 10px;
+    top: 40px;
     left: 450px;
   }
   #rugbyball{
     position: absolute;
-    top: 78px;
+    top: 108px;
     left: 602px;
     transition: all 0.5s ease-in-out;
   }
 
   #handball{
     position: absolute;
-    top: 130px;
+    top: 160px;
     left: 10px;
   }
   #handballball{
     position: absolute;
-    top: 200px;
+    top: 230px;
     left: 125px;
     transition: all 0.5s ease-in-out;
   }
 
   #hockey{
     position: absolute;
-    top: 130px;
+    top: 160px;
     left: 230px;
   }
   #hockeyball{
     position: absolute;
-    top: 210px;
+    top: 240px;
     left: 350px;
     transition: all 0.5s ease-in-out;
   }
   
   #softball{
     position: absolute;
-    top: 130px;
+    top: 160px;
     left: 450px;
   }
   #softballball{
     position: absolute;
-    top: 200px;
+    top: 230px;
     left: 600px;
     rotate: 45deg;
     transition: all 0.5s ease-in-out;
@@ -82,31 +82,31 @@
 
   #voley{
     position: absolute;
-    top: 250px;
+    top: 280px;
     left: 10px;
   }
   #voleyball{
     position: absolute;
-    top: 325px;
+    top: 355px;
     left: 185px;
     transition: all 0.5s ease-in-out;
   }
   
   #polo{
     position: absolute;
-    top: 250px;
+    top: 280px;
     left: 230px;
   }
   #poloball{
     position: absolute;
-    top: 320px;
+    top: 350px;
     left: 355px;
     transition: all 0.5s ease-in-out;
     z-index: 2;
   }
   #waves{
     position: absolute;
-    top: 332px;
+    top: 362px;
     left: 355px;
     transition: all 0.5s ease-in-out;
     z-index: 1;
@@ -114,12 +114,12 @@
 
   #baseball{
     position: absolute;
-    top: 250px;
+    top: 280px;
     left: 450px;
   }
   #baseballball{
     position: absolute;
-    top: 325px;
+    top: 355px;
     left: 605px;
     transition: all 0.5s ease-in-out;
   }
@@ -130,11 +130,23 @@
       transform: scale(1.05);
       transition: transform 0.5s ease-out;
       }
+    
+  #Sexo{
+    position: absolute;
+    top: 15px;
+    left: 300px;
+  }
 </style>
 
 
 </head>
 <body>
+  <select class="Sexo" id="Sexo" name="Sexo" onchange="FillAll()">
+    <option value="all">Todos</option>
+    <option value="male">Hombres</option>
+    <option value="female">Mujeres</option>
+  </select>
+
   <svg class="court futbol" id="futbol"   width="220" height="120">
     <rect id="fill" x="10" y="10" rx="5" ry="5" width="200" height="100" stroke="black" stroke-width="5" fill="url(#F1g)" />
     <circle id="circle" cx="110" cy="60" r="25" stroke="black" stroke-width="5" fill="none"/>
@@ -195,8 +207,8 @@
   
   <svg class="court handball" id="handball" width="220" height="120">
     <rect id="full" x="10" y="10" rx="5" ry="5" width="200" height="100" stroke="black" stroke-width="5" fill="url(#F4g)" />
-    <path d="M10 30 a1,1 0 0,10 60 0" fill="none" stroke="black" stroke-width="5"></path>
-    <path d="M210 30 a1,1 0 10,0 60 0" fill="none" stroke="black" stroke-width="5"></path>
+    <path d="M10 30 a1 1 0 0 10 60 0 Z" fill="none" stroke="black" stroke-width="5"></path>
+    <path d="M210 30 a1,1 0 10,0 60 0 Z" fill="none" stroke="black" stroke-width="5"></path>
     <rect x="165" y="55" width="7" height="10" ry="5"></rect>
     <rect x="45" y="55" width="7" height="10" ry="5"></rect>
     <path d="M30 10 S100 60 30 110 M180 10 S110 60 180 110" stroke-dasharray="20 5" fill="none" stroke="black" stroke-width="5"></path>
@@ -209,8 +221,8 @@
 
   <svg class="court hockey" id="hockey" width="220" height="120">
     <rect id="full" x="10" y="10" rx="5" ry="5" width="200" height="100" stroke="black" stroke-width="5" fill="url(#F5g)" />
-    <path d="M10 30 a1,1 0 0,10 60 0" fill="none" stroke="black" stroke-width="5"></path>
-    <path d="M210 30 a1,1 0 10,0 60 0" fill="none" stroke="black" stroke-width="5"></path>
+    <path d="M10 30 a1,1 0 0,10 60 0 Z" fill="none" stroke="black" stroke-width="5"></path>
+    <path d="M210 30 a1,1 0 10,0 60 0 Z" fill="none" stroke="black" stroke-width="5"></path>
     <path d="M10 15 S100 60 10 105 M210 15 S110 60 210 105" stroke-dasharray="5 5" fill="none" stroke="black" stroke-width="5"></path>
     <path d="M110 10 V110 M60 10 V110 M160 10 V110" stroke="black" stroke-width="5"></path>
   </svg>
@@ -343,7 +355,7 @@
     </g>
   </svg>
   
-  <script src="test.js"></script>
+  <script type="module" src="test.js"></script>
 </body>
 </html>
 
