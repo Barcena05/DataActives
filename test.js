@@ -62,13 +62,55 @@ function SelectSex(sex){
   return final;
 }
 
+function Countries(){
+  var countries = [];
+  var i = -1;
+  for (var country in data.countries) {
+    i++;
+    countries[i] = "";
+    countries[i] += data.countries[country].country_name;
+  }
+  return countries;
+}
+
+var c = Countries();
+var datalist = document.createElement('datalist');
+datalist.id = 'countries';
+
+for (var i = 0; i < c.length; i++) {
+  var option = document.createElement('option');
+  option.value = c[i];
+  datalist.appendChild(option);
+}
+
+var select = document.createElement('input');
+select.type = 'text';
+select.id = 'countries';
+select.name = 'countries';
+select.setAttribute('list', 'countries');
+
+document.body.appendChild(datalist);
+document.body.appendChild(select);
+
+
+//Para que no se vean vacios los graficos
+  var a = SelectSex('all');
+  crearGradiente('futbol', 'F1g', a[1]);
+  crearGradiente('basket', 'F2g', a[0]);
+  crearGradiente('rugby7', 'F3g', a[2]);
+  crearGradiente('handball', 'F4g', a[4]);
+  crearGradiente('hockey', 'F5g', a[6]);
+  crearGradiente('softball', 'F6g', a[5]);
+  crearGradiente('voley', 'F7g', a[8]);
+  crearGradiente('polo', 'F8g', a[7]);
+  crearGradiente('baseball', 'F9g', a[3]);
 
 //Dos formas que investigue de como podia funcionar que el selector
 //le pasara los valores al resto de clases
 
 function FillAll() {
   var x = document.getElementById("Sexo").value;
-  alert("El valor seleccionado es: " + x);
+  //alert("El valor seleccionado es: " + x);
   var a = SelectSex(x);
   crearGradiente('futbol', 'F1g', a[1]);
   crearGradiente('basket', 'F2g', a[0]);
@@ -87,7 +129,7 @@ const selectElement = document.querySelector(".Sexo");
 
 selectElement.addEventListener("change", (event) => {
   var a = SelectSex(event.target.value);
-  alert("El valor seleccionado es: " + event.target.value);
+  //alert("El valor seleccionado es: " + event.target.value);
   crearGradiente('futbol', 'F1g', a[1]);
   crearGradiente('basket', 'F2g', a[0]);
   crearGradiente('rugby7', 'F3g', a[2]);

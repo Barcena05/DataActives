@@ -134,7 +134,25 @@
   #Sexo{
     position: absolute;
     top: 15px;
-    left: 300px;
+    left: 50px;
+  }
+
+  #Region{
+    position: absolute;
+    top: 15px;
+    left: 140px;
+  }
+
+  #Desarrollo{
+    position: absolute;
+    top: 15px;
+    left: 295px;
+  }
+
+  #countries{
+    position: absolute;
+    top: 15px;
+    left: 445px;
   }
 </style>
 
@@ -142,10 +160,33 @@
 </head>
 <body>
   <select class="Sexo" id="Sexo" name="Sexo" onchange="FillAll()">
+    <option value="" selected disabled hidden> Sexo </option>
     <option value="all">Todos</option>
     <option value="male">Hombres</option>
     <option value="female">Mujeres</option>
   </select>
+
+  <select class="Region" id="Region" name="Region">
+    <option value="" selected disabled hidden> Region </option>
+    <option value="África">África</option>
+    <option value="Australia y Oceanía">Australia y Oceanía</option>
+    <option value="América">América</option>
+    <option value="Europa">Europa</option>
+    <option value="Asia">Asia</option>
+  </select>
+
+  <select class="Desarrollo" id="Desarrollo" name="Desarrollo">
+    <option value="" selected disabled hidden> Nivel de Desarrollo </option>
+    <option value="alto">Alto</option>
+    <option value="medio">Medio</option>
+    <option value="bajo">Bajo</option>
+  </select>
+
+  <!-- <select class="countries" id="countries" name="countries">
+    <option value="" selected disabled hidden> Pais </option>
+    
+  </select> -->
+
 
   <svg class="court futbol" id="futbol"   width="220" height="120">
     <rect id="fill" x="10" y="10" rx="5" ry="5" width="200" height="100" stroke="black" stroke-width="5" fill="url(#F1g)" />
