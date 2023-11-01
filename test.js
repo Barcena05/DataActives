@@ -37,6 +37,8 @@ function actualizarGradiente(gradienteID, porcentaje){
 
   var linearGradient = document.getElementById(gradienteID);
   let stops = [];
+  
+  
   var stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
   stop1.setAttribute("offset", "0%");
   stop1.setAttribute("stop-color", "#fdcae1");
@@ -52,10 +54,18 @@ function actualizarGradiente(gradienteID, porcentaje){
   stop2.setAttribute("stop-color", "#84b6f4");
   stops.push(stop2);
 
+  
   var stop21 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
   stop21.setAttribute("offset", "100%");
   stop21.setAttribute("stop-color", "#84b6f4");
   stops.push(stop21);
+  
+  if (porcentaje == -1){
+    stop1.setAttribute("stop-color", "transparent");
+    stop11.setAttribute("stop-color", "transparent");
+    stop2.setAttribute("stop-color", "transparent");
+    stop21.setAttribute("stop-color", "transparent");
+  }
 
   let collect = linearGradient.getElementsByTagName("stop");
   for (let index = 0; index < collect.length; index++) {
@@ -67,9 +77,9 @@ function FillCountries(region, development){
   var countries = [];
   var i = -1;
   for (var country in data.countries){
-    if ((country.continent == region && country.development == "") ||
-        (country.continent == region && development == "none") || 
-        (region == "none" && country.development == "") ||
+    if ((data.countries[country].continent == region && data.countries[country].development == "") ||
+        (data.countries[country].continent == region && development == "none") || 
+        (region == "none" && data.countries[country].development == "") ||
         (region == "none" && development == "none")){
       i++;
       countries[i] = country;
@@ -89,14 +99,13 @@ function SelectStats(sex, region, development, filterCountry){
   //sino le asigno none para el buen funcionamiento del codigo
   if (filterCountry != 'none'){
     for (var country in data.countries) {
-      if (country.country_name == filterCountry) {
+      if (country == filterCountry) {
         country_id = country;
         break;
       }
     }
   }
   
-
   //Llamo a una funcion que le asigna todos los paises que se incluyen en la region
   //y el desarrollo especificado
   arrayCountries = FillCountries(region, development);
@@ -106,24 +115,28 @@ function SelectStats(sex, region, development, filterCountry){
     totals[i] = 0;
     managersXsports[i] = 0;
     if (sex === 'female' || sex === 'all') {
-      totals[i] += data.sports[sport].female.countries.length;
       for (var j = 0; j < data.sports[sport].female.countries.length; j++) {
         if ((data.sports[sport].female.countries[j].country_id != country_id && country_id != "none") || country_id != "none") continue;
         if (!arrayCountries.includes(data.sports[sport].female.countries[j].country_id))  continue;
+        totals[i] ++;
         if (data.sports[sport].female.countries[j].manager_sex === "female") managersXsports[i]++;
       }
     }
     if (sex === 'male' || sex === 'all') {
-      totals[i] += data.sports[sport].male.countries.length;
       for (var j = 0; j < data.sports[sport].male.countries.length; j++) {
         if ((data.sports[sport].male.countries[j].country_id != country_id && country_id != "none") || country_id != "none") continue; 
         if (!arrayCountries.includes(data.sports[sport].male.countries[j].country_id)) continue;
+        totals[i] ++;
         if (data.sports[sport].male.countries[j].manager_sex === "female") managersXsports[i]++;
       }
     }
   }
   var final = [];
   for (let i = 0; i < managersXsports.length; i++) {
+    if (totals[i] == 0){
+      final[i] = -1;
+      continue;
+    }
     final[i] = (managersXsports[i] * 100) / totals[i];
   }
   return final;
@@ -132,23 +145,75 @@ function SelectStats(sex, region, development, filterCountry){
 
 
 
-//Para que no se vean vacios los graficos
-  var a = SelectStats('all', 'none', 'none', 'none');
-  crearGradiente('futbol', 'F1g', a[1]);
-  crearGradiente('basket', 'F2g', a[0]);
-  crearGradiente('rugby7', 'F3g', a[2]);
-  crearGradiente('handball', 'F4g', a[4]);
-  crearGradiente('hockey', 'F5g', a[6]);
-  crearGradiente('softball', 'F6g', a[5]);
-  crearGradiente('voley', 'F7g', a[8]);
-  crearGradiente('polo', 'F8g', a[7]);
-  crearGradiente('baseball', 'F9g', a[3]);
+//Para que no se vean vacios los graficos antes de escoger en los filtros
+var a = SelectStats('all', 'none', 'none', 'none');
+crearGradiente('futbol', 'F1g', a[1]);
+crearGradiente('basket', 'F2g', a[0]);
+crearGradiente('rugby7', 'F3g', a[2]);
+crearGradiente('handball', 'F4g', a[4]);
+crearGradiente('hockey', 'F5g', a[6]);
+crearGradiente('softball', 'F6g', a[5]);
+crearGradiente('voley', 'F7g', a[8]);
+crearGradiente('polo', 'F8g', a[7]);
+crearGradiente('baseball', 'F9g', a[3]);
 
 
 const selectElement = document.getElementById("Sexo");
+const selectRegion = document.getElementById("Region");
+const selectDevelopment = document.getElementById("Desarrollo");
+const selectCountry = document.getElementById("Countries");
+
+
+var sexoFijo = 'all';
+var regionFijo = 'none';
+var desarrolloFijo = 'none';
+var paisFijo = 'none';
 
 selectElement.addEventListener("change", (event) => {
-  var a = SelectStats(event.target.value, 'none', 'none', 'none');
+  var a = SelectStats(event.target.value, regionFijo, desarrolloFijo, paisFijo);
+  sexoFijo = event.target.value;
+  actualizarGradiente('F1g', a[1]);
+  actualizarGradiente('F2g', a[0]);
+  actualizarGradiente('F3g', a[2]);
+  actualizarGradiente('F4g', a[4]);
+  actualizarGradiente('F5g', a[6]);
+  actualizarGradiente('F6g', a[5]);
+  actualizarGradiente('F7g', a[8]);
+  actualizarGradiente('F8g', a[7]);
+  actualizarGradiente('F9g', a[3]);
+});
+
+selectRegion.addEventListener("change", (event) => {
+  var a = SelectStats(sexoFijo, event.target.value, desarrolloFijo, paisFijo);
+  regionFijo = event.target.value;
+  actualizarGradiente('F1g', a[1]);
+  actualizarGradiente('F2g', a[0]);
+  actualizarGradiente('F3g', a[2]);
+  actualizarGradiente('F4g', a[4]);
+  actualizarGradiente('F5g', a[6]);
+  actualizarGradiente('F6g', a[5]);
+  actualizarGradiente('F7g', a[8]);
+  actualizarGradiente('F8g', a[7]);
+  actualizarGradiente('F9g', a[3]);
+});
+
+selectDevelopment.addEventListener("change", (event) => {
+  var a = SelectStats(sexoFijo, regionFijo, event.target.value, paisFijo);
+  desarrolloFijo = event.target.value;
+  actualizarGradiente('F1g', a[1]);
+  actualizarGradiente('F2g', a[0]);
+  actualizarGradiente('F3g', a[2]);
+  actualizarGradiente('F4g', a[4]);
+  actualizarGradiente('F5g', a[6]);
+  actualizarGradiente('F6g', a[5]);
+  actualizarGradiente('F7g', a[8]);
+  actualizarGradiente('F8g', a[7]);
+  actualizarGradiente('F9g', a[3]);
+});
+
+selectCountry.addEventListener("change", (event) => {
+  var a = SelectStats(sexoFijo, regionFijo, desarrolloFijo, event.target.value);
+  paisFijo = event.target.value;
   actualizarGradiente('F1g', a[1]);
   actualizarGradiente('F2g', a[0]);
   actualizarGradiente('F3g', a[2]);
@@ -243,3 +308,21 @@ window.onload = function() {
         }, 500);
   });
 };
+
+function GetCountryNames(countries){
+  var countryNames = [];
+  for (var i = 0; i < countries.length; i++) {
+    countryNames[i] = data.countries[countries[i]].country_name;
+  }
+  return countryNames;
+}
+var select = document.getElementById("Countries");
+var nombres = FillCountries('none', 'none');
+var countryNames = GetCountryNames(nombres);
+
+for (var i = 0; i < nombres.length; i++) {
+  var option = document.createElement("option");
+  option.text = countryNames[i];
+  option.value = nombres[i];
+  select.add(option);
+}
