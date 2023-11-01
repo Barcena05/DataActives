@@ -1,4 +1,4 @@
-import data from './data/data.json' assert { type: "json"};
+import data from './data/data.js';
 
 function crearGradiente(svgID, gradienteID, porcentaje){
     var svg = document.getElementById(svgID);
@@ -32,6 +32,36 @@ function crearGradiente(svgID, gradienteID, porcentaje){
     defs.appendChild(linearGradient);
 
     svg.appendChild(defs);
+}
+function actualizarGradiente(svgID, gradienteID, porcentaje){
+  var svg = document.getElementById(svgID);
+
+  var linearGradient = document.getElementById(gradienteID);
+  let stops = [];
+  var stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.setAttribute("stop-color", "#fdcae1");
+  stops.push(stop1);
+
+  var stop11 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop11.setAttribute("offset", porcentaje + "%");
+  stop11.setAttribute("stop-color", "#fdcae1");
+  stops.push(stop11);
+
+  var stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop2.setAttribute("offset", porcentaje + "%");
+  stop2.setAttribute("stop-color", "#84b6f4");
+  stops.push(stop2);
+
+  var stop21 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop21.setAttribute("offset", "100%");
+  stop21.setAttribute("stop-color", "#84b6f4");
+  stops.push(stop21);
+
+  let collect = linearGradient.getElementsByTagName("stop");
+  for (let index = 0; index < collect.length; index++) {
+    linearGradient.replaceChild(stops[index],collect[index]);
+  }
 }
 
 function SelectSex(sex){
@@ -125,20 +155,21 @@ function FillAll() {
 
 //FillAll()
 
-const selectElement = document.querySelector(".Sexo");
+const selectElement = document.getElementById("Sexo");
 
 selectElement.addEventListener("change", (event) => {
   var a = SelectSex(event.target.value);
   //alert("El valor seleccionado es: " + event.target.value);
-  crearGradiente('futbol', 'F1g', a[1]);
-  crearGradiente('basket', 'F2g', a[0]);
-  crearGradiente('rugby7', 'F3g', a[2]);
-  crearGradiente('handball', 'F4g', a[4]);
-  crearGradiente('hockey', 'F5g', a[6]);
-  crearGradiente('softball', 'F6g', a[5]);
-  crearGradiente('voley', 'F7g', a[8]);
-  crearGradiente('polo', 'F8g', a[7]);
-  crearGradiente('baseball', 'F9g', a[3]);
+  console.log("Bitch");
+  actualizarGradiente('futbol', 'F1g', a[1]);
+  actualizarGradiente('basket', 'F2g', a[0]);
+  actualizarGradiente('rugby7', 'F3g', a[2]);
+  actualizarGradiente('handball', 'F4g', a[4]);
+  actualizarGradiente('hockey', 'F5g', a[6]);
+  actualizarGradiente('softball', 'F6g', a[5]);
+  actualizarGradiente('voley', 'F7g', a[8]);
+  actualizarGradiente('polo', 'F8g', a[7]);
+  actualizarGradiente('baseball', 'F9g', a[3]);
 
   
 });
