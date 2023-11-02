@@ -89,6 +89,7 @@ function FillCountries(region, development){
 }
 
 function SelectStats(sex, region, development, filterCountry){
+  
   var country_id = 'none';
   var arrayCountries = [];
   var managersXsports = [];
@@ -100,7 +101,7 @@ function SelectStats(sex, region, development, filterCountry){
   if (filterCountry != 'none'){
     for (var country in data.countries) {
       if (country == filterCountry) {
-        country_id = country;
+        country_id = filterCountry;
         break;
       }
     }
@@ -116,7 +117,7 @@ function SelectStats(sex, region, development, filterCountry){
     managersXsports[i] = 0;
     if (sex === 'female' || sex === 'all') {
       for (var j = 0; j < data.sports[sport].female.countries.length; j++) {
-        if ((data.sports[sport].female.countries[j].country_id != country_id && country_id != "none") || country_id != "none") continue;
+        if (((data.sports[sport].female.countries[j].country_id != country_id) && (country_id != "none"))) continue;
         if (!arrayCountries.includes(data.sports[sport].female.countries[j].country_id))  continue;
         totals[i] ++;
         if (data.sports[sport].female.countries[j].manager_sex === "female") managersXsports[i]++;
@@ -124,7 +125,7 @@ function SelectStats(sex, region, development, filterCountry){
     }
     if (sex === 'male' || sex === 'all') {
       for (var j = 0; j < data.sports[sport].male.countries.length; j++) {
-        if ((data.sports[sport].male.countries[j].country_id != country_id && country_id != "none") || country_id != "none") continue; 
+        if (((data.sports[sport].male.countries[j].country_id != country_id) && (country_id != "none"))) continue; 
         if (!arrayCountries.includes(data.sports[sport].male.countries[j].country_id)) continue;
         totals[i] ++;
         if (data.sports[sport].male.countries[j].manager_sex === "female") managersXsports[i]++;
@@ -274,9 +275,9 @@ window.onload = function() {
   });
 
   svg5.addEventListener('click', function(){
-    svg5b.style.top = "180px";
+    svg5b.style.top = "-80px";
     setTimeout(function(){
-      svg5b.style.top = "240px";
+      svg5b.style.top = "0px";
       }, 500);
   });
 
