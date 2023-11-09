@@ -1,5 +1,8 @@
 import data from './data/data.js';
 
+var totalGlobal = [];
+var sexoGlobal = [];
+
 function crearGradiente(svgID, gradienteID, porcentaje){
     var svg = document.getElementById(svgID);
 
@@ -38,7 +41,7 @@ function actualizarGradiente(gradienteID, porcentaje){
   var linearGradient = document.getElementById(gradienteID);
   let stops = [];
   
-  
+
   var stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
   stop1.setAttribute("offset", "0%");
   stop1.setAttribute("stop-color", "#fdcae1");
@@ -54,7 +57,6 @@ function actualizarGradiente(gradienteID, porcentaje){
   stop2.setAttribute("stop-color", "#84b6f4");
   stops.push(stop2);
 
-  
   var stop21 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
   stop21.setAttribute("offset", "100%");
   stop21.setAttribute("stop-color", "#84b6f4");
@@ -140,6 +142,8 @@ function SelectStats(sex, region, development, filterCountry){
     }
     final[i] = (managersXsports[i] * 100) / totals[i];
   }
+  totalGlobal = totals;
+  sexoGlobal = managersXsports;
   return final;
 }
 
@@ -157,6 +161,7 @@ crearGradiente('softball', 'F6g', a[5]);
 crearGradiente('voley', 'F7g', a[8]);
 crearGradiente('polo', 'F8g', a[7]);
 crearGradiente('baseball', 'F9g', a[3]);
+
 
 
 const selectElement = document.getElementById("Sexo");
@@ -245,12 +250,33 @@ window.onload = function() {
   var svg8b = document.getElementById('poloball');
   var svg9 = document.getElementById('baseball');
   var svg9b = document.getElementById('baseballball');
+  const cartel = document.querySelector('#cartel');
+  const sexoGlobalSum = 0;
+  const totalGlobalSum = 0;
 
   svg1.addEventListener('click', function(){
     svg1b.style.rotate = '360deg';
     setTimeout(function(){
       svg1b.style.rotate = '0deg';;
       }, 500);
+  });
+  svg1.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[0]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[0] - sexoGlobal[0]}
+                    <br>Equipos totales ${totalGlobal[0]}`;
+  });
+  svg1.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
   });
 
   svg2.addEventListener('click', function(){
@@ -259,12 +285,48 @@ window.onload = function() {
         svg2b.style.rotate = '0deg';;
         }, 500);
   });
+  svg2.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[1]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[1] - sexoGlobal[1]}
+                    <br>Equipos totales ${totalGlobal[1]}`;
+  });
+  svg2.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
+  });
 
   svg3.addEventListener('click', function(){
       svg3b.style.rotate = '360deg';
       setTimeout(function(){
         svg3b.style.rotate = '0deg';;
         }, 500);
+  });
+  svg3.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[2]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[2] - sexoGlobal[2]}
+                    <br>Equipos totales ${totalGlobal[2]}`;
+  });
+  svg3.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
   });
 
   svg4.addEventListener('click', function(){
@@ -273,12 +335,48 @@ window.onload = function() {
         svg4b.style.rotate = '0deg';;
         }, 500);
   });
+  svg4.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[4]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[4] - sexoGlobal[4]}
+                    <br>Equipos totales ${totalGlobal[4]}`;
+  });
+  svg4.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
+  });
 
   svg5.addEventListener('click', function(){
     svg5b.style.top = "-80px";
     setTimeout(function(){
       svg5b.style.top = "0px";
       }, 500);
+  });
+  svg5.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[6]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[6] - sexoGlobal[6]}
+                    <br>Equipos totales ${totalGlobal[6]}`;
+  });
+  svg5.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
   });
 
   svg6.addEventListener('click', function(){
@@ -287,12 +385,48 @@ window.onload = function() {
         svg6b.style.rotate = '0deg';;
         }, 500);
   });
+  svg6.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[5]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[5] - sexoGlobal[5]}
+                    <br>Equipos totales ${totalGlobal[5]}`;
+  });
+  svg6.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
+  });
 
   svg7.addEventListener('click', function(){
       svg7b.style.rotate = '360deg';
       setTimeout(function(){
         svg7b.style.rotate = '0deg';;
         }, 500);
+  });
+  svg7.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[8]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[8] - sexoGlobal[8]}
+                    <br>Equipos totales ${totalGlobal[8]}`;
+  });
+  svg7.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
   });
 
   svg8.addEventListener('click', function(){
@@ -301,6 +435,24 @@ window.onload = function() {
         svg8b.style.rotate = '0deg';;
         }, 500);
   });
+  svg8.addEventListener('mouseover', (event) => {event.clientY
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[7]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[7] - sexoGlobal[7]}
+                    <br>Equipos totales ${totalGlobal[7]}`;
+  });
+  svg8.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
+  });
 
   svg9.addEventListener('click', function(){
       svg9b.style.rotate = '360deg';
@@ -308,14 +460,40 @@ window.onload = function() {
         svg9b.style.rotate = '0deg';;
         }, 500);
   });
+  svg9.addEventListener('mouseover', (event) => {
+    cartel.style.display = 'block';
+    
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobal[3]}
+                    <br>Equipos dirigidos por hombres ${totalGlobal[3] - sexoGlobal[3]}
+                    <br>Equipos totales ${totalGlobal[3]}`;
+  });
+  svg9.addEventListener('mouseout',() => {
+    var sexoGlobalSum = 0;
+    var totalGlobalSum = 0;
+    for (let i = 0; i < 9; i++) {
+      sexoGlobalSum += sexoGlobal[i];
+      totalGlobalSum += totalGlobal[i];
+    }
+    cartel.innerHTML = `Equipos dirigidos por mujeres ${sexoGlobalSum}
+                    <br>Equipos dirigidos por hombres ${totalGlobalSum - sexoGlobalSum}
+                    <br>Equipos totales ${totalGlobalSum}`;
+  });
+
+  //Cartel que sale cuando le pasas el mouse por encima a la grafica
+  
+
+  
 };
+
+//1 0 2 4 6 5 8 7 3
+//f b r m h s v w p
 
 function GetCountryNames(countries){
   var countryNames = [];
   for (var i = 0; i < countries.length; i++) {
     countryNames[i] = data.countries[countries[i]].country_name;
   }
-  return countryNames;
+  return ordenarArray(countryNames);
 }
 var select = document.getElementById("Countries");
 var nombres = FillCountries('none', 'none');
@@ -326,4 +504,17 @@ for (var i = 0; i < nombres.length; i++) {
   option.text = countryNames[i];
   option.value = nombres[i];
   select.add(option);
+}
+
+function ordenarArray(array){
+  for (var i = 0; i < array.length; i++) {
+    for (var j = 0; j < array.length - 1; j++) {
+      if (array[j] > array[j + 1]) {
+        var temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
+      }
+    }
+  }
+  return array;
 }

@@ -152,27 +152,37 @@
     #Countries {
       position: relative;
     }
+
+    #cartel {
+      position: relative;
+      z-index: 9999;
+    }
   </style>
 
 
 </head>
 
+  <div class="flex-item" id="cartel" style="background-color: white;
+    border: 1px solid black; padding: 5px;">Equipos dirigidos por mujeres 41
+                    <br>Equipos dirigidos por hombres 332
+                    <br>Equipos totales 373</div>
+
   <div style="margin-top: 15px;">
     <select class="Sexo" id="Sexo" name="Sexo">
-      <option value="" selected disabled hidden> Sexo </option>
+      <option value="" selected disabled hidden> Modalidad </option>
       <option value="all">Todos</option>
-      <option value="male">Hombres</option>
-      <option value="female">Mujeres</option>
+      <option value="female">Femenino</option>
+      <option value="male">Masculino</option>
     </select>
   
     <select class="Region" id="Region" name="Region">
       <option value="" selected disabled hidden> Region </option>
       <option value="none" > Todos </option>
       <option value="África">África</option>
-      <option value="Australia y Oceanía">Australia y Oceanía</option>
       <option value="América">América</option>
-      <option value="Europa">Europa</option>
       <option value="Asia">Asia</option>
+      <option value="Australia y Oceanía">Australia y Oceanía</option>
+      <option value="Europa">Europa</option>
     </select>
   
     <select class="Desarrollo" id="Desarrollo" name="Desarrollo">
